@@ -25,7 +25,7 @@ func main() {
 		&cli.StringFlag{
 			Name:     "port",
 			Aliases:  []string{"p"},
-			Usage:    "gRPC port",
+			Usage:    "HTTP port",
 			Required: true,
 		},
 	}
