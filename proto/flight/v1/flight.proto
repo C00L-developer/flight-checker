@@ -1,0 +1,37 @@
+/**
+* Flight service.
+**/
+
+syntax = "proto3";
+package flight.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/C00L-developer/flight-checker/pb";
+
+service FlightService {
+    // Getters
+    /// Get one sorted flight
+    rpc GetSortedFlight(GetSortedFlightRequest) returns (GetSortedFlightResponse) {
+        option (google.api.http) = {
+            post: "/calculate"
+            body: "*"
+        };
+    }
+}
+
+// Flight message represents one path 
+message Flight {
+    string source = 1;
+    string target = 2;
+}
+
+// Get request
+message GetSortedFlightRequest {
+    repeated Flight flights = 1;
+}
+
+// Get response
+message GetSortedFlightResponse {
+    Flight result = 1;
+}
