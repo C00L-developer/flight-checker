@@ -2,7 +2,10 @@ package controller_test
 
 import (
 	"context"
+	"math/rand"
+	"strconv"
 	"testing"
+	"time"
 
 	"github.com/C00L-developer/flight-checker/pkg/controller"
 	"github.com/C00L-developer/flight-checker/pkg/pb"
@@ -199,4 +202,40 @@ func TestFlightCtrl(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestRandomFlight(t *testing.T) {
+	for i := 0; i < 10000; i++ {
+		n := rand.Intn(100) + 1
+		flights := getRandomPath(n)
+		expected := &pb.Flight{
+			Source: strconv.Itoa(0),
+			Target: strconv.Itoa(n),
+		}
+		fc := &controller.FlightCtrl{}
+		res, err := fc.GetSortedFlight(context.TODO(), &pb.GetSortedFlightRequest{Flights: flights})
+		require.NoError(t, err)
+		require.Equal(t, expected, res.Result)
+	}
+}
+
+func getRandomPath(size int) []*pb.Flight {
+	a := make([]int, size)
+
+	for i := 0; i < size; i++ {
+		a[i] = i
+	}
+
+	rand.Seed(time.Now().UnixNano())
+	rand.Shuffle(len(a), func(i, j int) { a[i], a[j] = a[j], a[i] })
+
+	res := make([]*pb.Flight, size)
+	for i := 0; i < size; i++ {
+		res[i] = &pb.Flight{
+			Source: strconv.Itoa(a[i]),
+			Target: strconv.Itoa(a[i] + 1),
+		}
+	}
+
+	return res
 }

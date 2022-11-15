@@ -4,7 +4,7 @@ GOENVVARS := GOBIN=$(GOBIN)
 GOBINARY := flight
 GOCMD := $(GOBASE)/cmd
 
-LINT := $$(go env GOPATH)/bin/golangci-lint run --timeout=5m -E whitespace -E gosec -E gci -E misspell -E gomnd -E gofmt -E goimports -E golint --exclude-use-default=false --max-same-issues 0
+LINT := $$(go env GOPATH)/bin/golangci-lint run --timeout=5m -E whitespace -E misspell -E gomnd -E gofmt -E goimports --exclude-use-default=false --max-same-issues 0
 BUILD := $(GOENVVARS) go build $(LDFLAGS) -o $(GOBIN)/$(GOBINARY) $(GOCMD)
 
 .PHONY: build

@@ -11,14 +11,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/C00L-developer/flight-checker/pkg/controller"
-	"github.com/C00L-developer/flight-checker/pkg/pb"
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/protobuf/encoding/protojson"
+
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+
+	"github.com/C00L-developer/flight-checker/pkg/controller"
+	"github.com/C00L-developer/flight-checker/pkg/pb"
 )
 
 // RunServer runs gRPC server and HTTP gateway
